@@ -3,7 +3,7 @@ PROBLEM DEFINITION
 -----------------
 Reverse each word in the input string.
 The order of the words will be unchanged.
-A word is made upof letters and/or numbers.
+A word is made up of letters and/or numbers.
 Other characters (spaces, punctuation) will not be reversed.
 
 NOTES
@@ -13,7 +13,7 @@ We prefer clarity over performance (though if you can achieve both- great!)
 You can use the language that best highlights your programming ability.
 
 
-As such in this Assignment, I will be using Python to perform my codes.
+As such in this Assignment1 and Assignment2, I will be using Python to write my codes.
 """
 
 
@@ -51,7 +51,7 @@ def reverse_words(s: str) -> str:
                     index += 1
                 else:
                     reversed_words.append(i)
-                    
+
             temp = "".join(reversed_words)
             final_result.append(temp)
             reversed_words = []
@@ -62,6 +62,8 @@ def reverse_words(s: str) -> str:
 
 
 def batch_test():
+    """Test cases to validate the solution"""
+
     assert reverse_words("String;  2be  reversed...") == "gnirtS;  eb2  desrever..."
     assert reverse_words("abc123") == "321cba"
     assert reverse_words("a-bC-dEf-ghIj") == "j-Ih-gfE-dCba"
@@ -86,4 +88,7 @@ def batch_test():
 
 
 if __name__ == "__main__":
+    # Example usage
+    assert reverse_words("String;  2be  reversed...") == "gnirtS;  eb2  desrever..."
+
     batch_test()
