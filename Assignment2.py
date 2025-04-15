@@ -18,7 +18,7 @@ def update_environment_variable(file_path, temp_file, pattern, replace):
     try:
         with open(file_path, "r") as fin:
             for line in fin:
-                # Searching for the line that matches the pattern
+                # Loop through each line to search for the line that matches the pattern
                 if re.search(pattern, line):
                     print(f" Found:  {line.strip()}")
                     updated_line = re.sub(pattern, replace, line)
