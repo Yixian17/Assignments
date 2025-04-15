@@ -33,6 +33,7 @@ def update_environment_variable(file_path, temp_file, pattern, replace):
             with open(temp_file, "w") as fout:
                 fout.writelines(updated_lines)
 
+            # replace the original file with the newly updated file
             os.remove(file_path)
             os.rename(temp_file, file_path)
             print(f"{file_path} updated with build number {build_num}.\n")
@@ -50,13 +51,19 @@ def update_environment_variable(file_path, temp_file, pattern, replace):
 if __name__ == "__main__":
     # Getting the environment variables from .env file
     build_num = os.getenv("BuildNum")
+
+    # dynamically getting the source path from the environment variable
     source_path = os.getenv("SourcePath")
+    if source_path in [None, "DEFAULT"]:
+        source_path = os.getcwd()
 
     # file paths to be updated
     sconstruct_file_path = os.path.join(
-        source_path, "develop", "global", "src", "SConstruct"
+        source_path, "Test", "develop", "global", "src", "SConstruct"
     )
-    version_file_path = os.path.join(source_path, "develop", "global", "src", "VERSION")
+    version_file_path = os.path.join(
+        source_path, "Test", "develop", "global", "src", "VERSION"
+    )
 
     # patterns to search for in the files
     sconstruct_pattern = r"point\s*=\s*\d+"

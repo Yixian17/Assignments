@@ -84,7 +84,7 @@ def batch_test():
         == "1" * 10000 + "!" + "a" * 10000
     )
 
-    print("All test cases passed!")
+    print("All test cases passed!\n")
 
 
 if __name__ == "__main__":
