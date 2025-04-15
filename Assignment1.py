@@ -11,7 +11,9 @@ NOTES
 Write production quality code
 We prefer clarity over performance (though if you can achieve both- great!)
 You can use the language that best highlights your programming ability.
-In this Assignment, I will be using Python to perform my codes.
+
+
+As such in this Assignment, I will be using Python to perform my codes.
 """
 
 
@@ -49,6 +51,7 @@ def reverse_words(s: str) -> str:
                     index += 1
                 else:
                     reversed_words.append(i)
+                    
             temp = "".join(reversed_words)
             final_result.append(temp)
             reversed_words = []

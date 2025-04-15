@@ -10,30 +10,31 @@ def update_environment_variable(file_path, temp_file, pattern, replace):
     updated_lines = []
     changes_made = False
 
-    print(f"Opening file: {file_path}")
+    os.chmod(file_path, 0o755)
 
+    print(f"Opening file: {file_path}")
+ 
     try:
         with open(file_path, "r") as fin:
             for line in fin:
                 if re.search(pattern, line):
-                    print(f"  - Found:  {line.strip()}")
+                    print(f" Found:  {line.strip()}")
                     updated_line = re.sub(pattern, replace, line)
-                    print(f"  + Update: {updated_line.strip()}\n")
-                    changes_made = True
-                    # original_line = line
+                    print(f" Update: {updated_line.strip()}\n")
+                    if line != updated_line:
+                        changes_made = True
                     updated_lines.append(updated_line)
                 else:
                     updated_lines.append(line)
 
-        # if updated_line != original_line:
         if changes_made:
             with open(temp_file, "w") as fout:
                 fout.writelines(updated_lines)
-                os.remove(file_path)
-                os.rename(temp_file, file_path)
-                print(f"{file_path} updated with build number {build_num}.")
+            os.remove(file_path)
+            os.rename(temp_file, file_path)
+            print(f"{file_path} updated with build number {build_num}.\n")
         else:
-            print("No changes needed — file is already up to date!")
+            print("No changes needed — file is already up to date!\n")
 
     except FileNotFoundError:
         print(f"File {file_path} not found.")
@@ -54,6 +55,7 @@ if __name__ == "__main__":
 
     sconstruct_pattern = r"point\s*=\s*\d+"
     version_pattern = r"ADLMSDK_VERSION_POINT\s*=\s*\d+"
+
     sconstruct_replace = f"point = {build_num}"
     version_replace = f"ADLMSDK_VERSION_POINT = {build_num}"
 
